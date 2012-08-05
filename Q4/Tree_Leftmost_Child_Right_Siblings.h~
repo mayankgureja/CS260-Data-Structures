@@ -1,0 +1,28 @@
+#include <string>
+using namespace std;
+
+const int MAXNODES = 100;
+
+typedef int node_t;
+typedef int Tree;
+typedef string labeltype;
+
+struct cell{
+	labeltype label;
+	node_t leftmost_child;
+	node_t right_sibling;
+	node_t parent;
+};
+
+void init();
+node_t Parent(node_t n,Tree T);
+node_t Leftmost_Child(node_t n, Tree T);
+node_t Right_Sibling(node_t n, Tree T);
+labeltype Label(node_t n,Tree T);
+Tree Create0(labeltype v);
+Tree Create1(labeltype v,Tree T1);
+Tree Create2(labeltype v,Tree T1,Tree T2);
+Tree Create3(labeltype v,Tree T1,Tree T2,Tree T3);
+node_t Root(Tree T);
+void MAKENULL(Tree& T);
+

@@ -1,0 +1,128 @@
+#include "Tree_listChildren.h"
+
+void init(){
+	//initialize cellspace to all available
+	avail =1;
+	for (int i=1;i<=MAXNODES;i++){
+		cellspace[i].next = i+1;
+	}
+}
+Tree_listChildren::Tree_listChildren(){
+	cursor = availn;
+}
+
+node_t Tree_listChildren::Parent(node_t n){ //Return the Parent of node n of Tree T
+	return nodespace[n].parent;
+}
+
+node_t Tree_listChildren::Leftmost_Child(node_t n){
+	int header = nodespace[n].header;
+	if (header==0) //n is a leaf
+		return 0;
+	else
+		return cellspace[header].node;
+};
+
+
+node_t Tree_listChildren::Right_Sibling(node_t n){
+	node_t parent = Parent(n,T);
+	int child_pos = nodespace[parent].header;
+	if (cellspace[child_pos].next == 0)//n is the only child
+		return 0; // no right sibling
+	else{
+		while (cellspace[child_pos].node != n){
+			child_pos = cellspace[child_pos].next;
+		}
+		return cellspace[cellspace[child_pos].next].node;
+	}
+};
+
+labeltype Tree_listChildren::Label(node_t n){
+	return nodespace[n].label;
+};
+
+
+Tree_listChildren Tree_listChildren::Create0(labeltype l){
+	int i=1;
+	while(nodespace[i].label != ""){ //Find available nodespaces
+		i +=1;
+	}
+	nodespace[i].label = l;
+	nodespace[i].header = 0; //It's the only node, so no children list;
+	nodespace[i].parent = 0; //It's the root, no parent
+	Tree new_T = i; // New_Tree is just a cursor pointing to the position of the root in nodespace
+	return new_T;
+};
+
+Tree_listChildren Tree_listChildren::Create1(labeltype l,Tree_listChildren T1){
+	int i=1;
+	while(nodespace[i].label != ""){ //Find available nodespaces
+		i +=1;
+	}
+	nodespace[i].label = l;
+	int temp = avail;
+	avail = cellspace[avail].next; //New space for the root;
+	cellspace[temp].node = T1; //T1 will be the children of new node
+	cellspace[temp].next = 0; //T1 has no siblings.
+	nodespace[i].header =temp;
+	nodespace[i].parent =0;
+	nodespace[T1].parent = i;
+	Tree new_T = i;
+	return new_T;
+}
+
+Tree_listChildren Tree_listChildren::Create2(labeltype l,Tree_listChildren T1,Tree_listChildren T2){
+	int i=1;
+	while(nodespace[i].label != ""){ //Find available nodespaces
+		i +=1;
+	}
+	nodespace[i].label = l;
+	int temp = avail;
+	avail = cellspace[avail].next; //New space for the T1 child of the root;
+	cellspace[temp].node = T1; //T1 will be the children of new node
+	cellspace[temp].next = avail; // The next available space will be reserved for T2
+	int temp2 = avail;
+	avail = cellspace[avail].next; //New space for the T2 child of the root;
+	cellspace[temp2].node = T2; //T1 has T2 as its sibling.
+	cellspace[temp2].next = 0; //T2 has no siblings afterwards.
+	nodespace[i].header = temp;
+	nodespace[i].parent = 0;
+	nodespace[T1].parent = i;
+	nodespace[T2].parent = i;
+	Tree new_T = i;
+	return new_T;
+}
+Tree_listChildren Tree_listChildren::Create3(labeltype l,Tree_listChildren T1,Tree_listChildren T2,Tree_listChildren T3){
+	int i=1;
+	while(nodespace[i].label != ""){ //Find available nodespaces
+		i +=1;
+	}
+	nodespace[i].label = l;
+	int temp = avail;
+	avail = cellspace[avail].next; //New space for the T1 child of the root;
+	cellspace[temp].node = T1; //T1 will be the children of new node
+	cellspace[temp].next = avail; // The next available space will be reserved for T2
+	int temp2 = avail;
+	avail = cellspace[avail].next; //New space for the T2 child of the root;
+	cellspace[temp2].node = T2; //T1 has T2 as its sibling.
+	cellspace[temp2].next = avail; //The next available space will be reserved for T3
+	int temp3 = avail;
+	avail = cellspace[avail].next; //New space for the T2 child of the root;
+	cellspace[temp3].node = T3; //T2 has T3 as its sibling.
+	cellspace[temp3].next = 0; //T3 has no siblings afterwards.
+	nodespace[i].header =temp;
+	nodespace[i].parent = 0;
+	nodespace[T1].parent = i;
+	nodespace[T2].parent = i;
+	nodespace[T3].parent = i;
+	Tree new_T = i;
+	return new_T;
+}
+node_t Tree_listChildren::Root(){
+	return T;
+}
+/*  This function traverses tree in post order to 
+	  to delete each and every node of the tree */
+void Tree_listChildren::MAKENULL(){
+	
+}

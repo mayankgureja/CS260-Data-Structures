@@ -1,0 +1,79 @@
+#include "Tree_List_Of_Children.h"
+//#include "Tree_Leftmost_Child_Right_Siblings.h"
+#include <iostream>
+
+int Test_Tree_List_Of_Children(){
+	init();
+/*      1
+ *  /   |  \
+ *  2   3   4
+ *  |  /\   |
+ *  5 6  7  8
+ */
+	// Get all the leaves
+	Tree TH = Create0((labeltype) "8");
+
+	Tree TG = Create0((labeltype) "7");
+	Tree TF = Create0((labeltype) "6");
+	Tree TE = Create0((labeltype) "5");
+
+	Tree TBE = Create1((labeltype) "2",TE);
+	Tree TCFG = Create2((labeltype) "3",TF,TG);
+	Tree TDH = Create1((labeltype) "4",TH);
+	Tree T = Create3((labeltype) "1",TBE,TCFG,TDH);
+
+	cout << "The root is " <<Label(T,T) << ". The root should be 1"<<endl;
+	node_t B = Leftmost_Child(T,T);
+	cout << "The leftmost child of A is " << Label(B,T) << ". It should be 2"<<endl;
+	node_t C = Right_Sibling(B,T);
+	cout << "The Right sibling of  B is " << Label(C,T) << ". It should be 3"<<endl;
+	node_t D = Right_Sibling(C,T);
+	cout << "The Right sibling of C is " << Label(D,T) << ". It should be 4"<<endl;
+
+	node_t E = Leftmost_Child(B,T);
+	cout << "The leftmost child of B is "<< Label(E,T) << ". It should be 5"<<endl;
+	node_t F = Leftmost_Child(C,T);
+	cout << "The Leftmost Child of C is "<< Label(F,T) << ". It should be 6"<<endl;
+	node_t G = Right_Sibling(F,T);
+	cout << "The Right sibling of F is " << Label(G,T) << ". It should be 7"<<endl;
+	node_t H = Leftmost_Child(D,T);
+	cout << "The Leftmost Child of D is " << Label(H,T) << ". It should be 8"<<endl;
+	cout<< "***********************Preorder Listing**************************" <<endl;
+	preorder(T);
+	cout<<endl;
+	cout<< "***********************Problem 9: Book 3.3 Find Height**************************" <<endl;
+	cout << "The height of the tree is " << Height(T) << endl;
+	cout<< "***********************Problem 10: Book 3.10 Level-order Listing**************************" <<endl;
+	LevelOrder(T);
+	cout<<endl;
+	cout<< "***********************Problem 12: Book 3.14 Prefix/Postfix Evaluation**************************" <<endl;
+
+	/*     *
+	 *   /   \
+	 *  +     -
+	 * /\	  /\
+	 * 1 2   5  4
+	 */
+	cout<< "Given Prefix Expression *+12-45, the evaluation result is " <<EvalPrefix("*+12-54")<<". It should be 3";
+	cout<< "Given Postfix Expression 12+54-*, the evaluation result is " <<EvalPostfix("12+54-*")<<". It should be 3";
+	return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

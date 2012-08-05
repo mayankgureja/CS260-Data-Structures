@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+#include "Stack.h"
+
+using namespace std;
+
+int main()
+{
+	cout<<"Testing...\n";
+	Stack<int,string> s;
+	
+	cout<<"Push 45"<<endl;
+	s.push("45");
+	cout<<"Test #Top: "<<s.top()<<". It Should be 45"<<endl;
+	cout<<"Push 75"<<endl;
+	s.push("75");
+	cout<<"Push 378"<<endl;
+	s.push("378");
+	cout<<"Test #Empty "<< s.empty()<<". It Should be 0 	(boolean false)"<< endl; //check empty
+	s.pop();
+	cout<<"Test #Pop. After Pop, top(s) returns "<< s.top() <<". It should return 75"<<endl;
+	s.pop();
+	cout<<"Test #Pop. After Pop, top(s) returns "<< s.top() <<". It should return 45"<<endl;
+	s.pop();
+	cout <<"Test #Empty. Last Pop, top(s) returns "<< s.empty() <<". It should return 1 (boolean true)"<<endl;
+	cout<<"Push 10"<<endl;
+	s.push("10");
+	cout <<"Current top "<< s.top() <<". It should be 10"<<endl;
+	s.MAKENULL();
+	cout<<"Test #MAKENULL. After s.MAKENULL(), s.empty() returns" << s.empty() << ". It should return 1"<< endl; //check empty
+	return 0;
+}
+
+

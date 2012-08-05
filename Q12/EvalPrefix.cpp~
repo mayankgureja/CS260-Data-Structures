@@ -1,0 +1,36 @@
+#include <string>
+using namespace std;
+string EvalPrefix(string prefix){
+	Stack S;
+	init(S);
+
+	int result;
+	int x;
+	int y;
+	for (int i=prefix.length()-1;i>=0; i--){ //Reverse Scan
+		string input = prefix.substr(i,1);
+		if (input.compare("+") !=0 && input.compare("-") !=0 && input.compare("*") !=0 && input.compare("/") !=0){
+			push(input,S);
+		}
+		else{
+			x = str2int(top(S));
+			pop(S);
+			y = str2int(top(S));
+			pop(S);
+			if (input.compare("+") == 0){
+				result = x+y;
+			}
+			else if (input.compare("-") == 0){
+				result = x-y;
+			}
+			else if (input.compare("*") == 0){
+				result = x*y;
+			}
+			else {
+				result = x/y;
+			}
+			push(int2str(result),S);
+		}
+	}
+	return top(S);
+}
