@@ -3,8 +3,6 @@
 
 using namespace std;
 
-
-
 typedef int node_t;
 typedef int Tree;
 typedef string labeltype;
