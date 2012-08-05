@@ -34,14 +34,13 @@ int main(){
 	Tree T48 = Create1((labeltype) "4",T8);
 	cout << "Test #Create. Call Create3((labeltype) \"1\",T25,T367,T48)"<<endl;
 	Tree T = Create3((labeltype) "1",T25,T367,T48);
-	
+
   cout << "Final Tree Structure:"	<<endl;
   cout <<" /*      1" <<endl;
   cout <<"  *  /   |  \\"<<endl;
   cout <<"  *  2   3   4"<<endl;
   cout <<"  *  |  /\\   |"<<endl;
   cout <<"  *  5 6  7  8 "<<endl;
-
 
 	cout << "Test #Root. Call Label(Root(T),T). The root is " <<Label(Root(T),T) << ". The root should be 1"<<endl;
 	node_t B = Leftmost_Child(T,T);
@@ -59,6 +58,23 @@ int main(){
 	cout << "The Right sibling of 6 is " << Label(G,T) << ". It should be 7"<<endl;
 	node_t H = Leftmost_Child(D,T);
 	cout << "The Leftmost Child of 4 is " << Label(H,T) << ". It should be 8"<<endl;
+
+	cout << "Test #MAKENULL. CALL MAKENULL(T367)" << endl;
+	MAKENULL(T367);
+	cout << "The Tree should become this :" << endl;
 	
+	cout << "Final Tree Structure:"	<<endl;
+  cout <<" /*    1" <<endl;
+  cout <<"  *  /   \\"<<endl;
+  cout <<"  *  2    4"<<endl;
+  cout <<"  *  |    |"<<endl;
+  cout <<"  *  5    8 "<<endl;
+	
+	node_t left_child = Leftmost_Child(Root(T),T);
+	cout << "Call Leftmost_Child(Root(T),T) returns " << Label(left_child,T) << ". It should return 2" << endl;
+	cout << "Call Right_Sibling(left_child,T) returns " << Label(Right_Sibling(left_child,T),T);
+	cout << ". It should return 4" << endl;
+
 	return 0;
 }
+

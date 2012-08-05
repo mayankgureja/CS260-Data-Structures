@@ -12,7 +12,6 @@ class List{
 	public:
 		List();
 		List(int size);
-		~List();
 		void MakeNull();
 		int First() const;
 		int End() const;
@@ -40,15 +39,6 @@ List<E>::List(int size){
 	elements = new E [MAXSIZE];
 }
 
-
-template <typename E>
-List<E>::~List(){
-	delete[] elements;
-}
-
-
-
-
 template <typename E>
 void List<E>::MakeNull(){
 	last = 0;
@@ -63,7 +53,7 @@ int List<E>::First() const
 template <typename E>
 int List<E>::End() const
 {
-	return last;
+	return last+1;
 }
 
 template <typename E>
@@ -94,10 +84,10 @@ int List<E>::Previous(int p) const
 template <typename E>
 E List<E>::Retrieve(int p) const
 {
-	if (p<1 || p>last){
-		return (E) NULL;
+	if (p>=1 && p<=last){
+		return elements[p];
 	}
-	return elements[p];
+
 }
 
 template <typename E>

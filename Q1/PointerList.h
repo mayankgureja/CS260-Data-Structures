@@ -12,8 +12,7 @@ class Node{
 
 template <typename E>
 Node<E>::Node(){
-	element = E (NULL);
-	next = NULL;
+
 }
 
 template <typename E>
